@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="5dp"
+    android:paddingTop="4dp"
+    android:paddingBottom="4dp"
+    android:paddingLeft="17dp"
+    android:paddingRight="17dp">
+
+    <TextView
+        android:id="@+id/textViewName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/tomorrow_semibold"
+        android:text="Contact Name"
+        android:textSize="14sp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#000000"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/imageView2"
+        app:layout_constraintTop_toTopOf="@+id/imageView2" />
+
+    <TextView
+        android:id="@+id/textViewEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/tomorrow_light"
+        android:text="contact@example.com"
+        android:textSize="9sp"
+        android:textColor="#494949"
+        android:layout_marginLeft="5dp"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/imageView2"
+        app:layout_constraintTop_toBottomOf="@id/textViewName" />
+
+    <TextView
+        android:id="@+id/textViewIp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:fontFamily="@font/tomorrow_light"
+        android:text="192.168.1.1"
+        android:textSize="9sp"
+        android:textColor="#494949"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/line"
+        app:layout_constraintTop_toTopOf="@+id/textViewEmail" />
+
+    <ImageView
+        android:id="@+id/line"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginLeft="2dp"
+        android:src="@drawable/profile_divider"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewEmail"
+        app:layout_constraintStart_toEndOf="@+id/textViewEmail"
+        app:layout_constraintTop_toTopOf="@+id/textViewEmail" />
+
+    <ImageView
+        android:id="@+id/imageViewFavorite"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/list_favorit_off_icon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_marginLeft="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageViewFavorite"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/profile_divider" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.6"
+        app:srcCompat="@drawable/list_avatar_bg" />
+
+    <ImageView
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/list_profile_icon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Phone Number</string>
+    <string name="employee_data">EMPLOYEE DATA</string>
+    <string name="favorite">FAVORITE</string>
+</resources>

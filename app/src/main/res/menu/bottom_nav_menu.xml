@@ -1,0 +1,13 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_contacts"
+        android:icon="@drawable/menu_empl"
+        android:title="@string/employee_data"
+        />
+
+    <item
+        android:id="@+id/nav_favorites"
+        android:icon="@drawable/menu_favorite"
+        android:title="@string/favorite"
+        />
+</menu>

@@ -1,9 +1,6 @@
 package com.mysticism.domain.usecase
 
-import android.annotation.SuppressLint
 import android.content.Context
-import android.content.res.Resources
-import android.util.Log
 import com.mysticism.data.local.ContactDao
 import com.mysticism.data.remote.ImageApi
 import com.mysticism.data.models.Data
@@ -13,7 +10,6 @@ import kotlinx.coroutines.withContext
 import okhttp3.ResponseBody
 import java.io.File
 import java.io.FileOutputStream
-import java.io.InputStream
 
 class FetchAndSaveImagesUseCase(
     private val context: Context,

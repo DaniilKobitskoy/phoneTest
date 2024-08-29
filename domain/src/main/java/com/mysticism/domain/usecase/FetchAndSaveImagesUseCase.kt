@@ -1,13 +1,19 @@
 package com.mysticism.domain.usecase
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.content.res.Resources
+import android.util.Log
 import com.mysticism.data.local.ContactDao
 import com.mysticism.data.remote.ImageApi
 import com.mysticism.data.models.Data
+import com.mysticism.domain.R
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import okhttp3.ResponseBody
 import java.io.File
+import java.io.FileOutputStream
+import java.io.InputStream
 
 class FetchAndSaveImagesUseCase(
     private val context: Context,
@@ -15,11 +21,12 @@ class FetchAndSaveImagesUseCase(
     private val contactDao: ContactDao
 ) {
 
+    private val standardImageResourceId = R.raw.list_avatar_bg
     suspend fun execute(contacts: List<Data>) {
         withContext(Dispatchers.IO) {
             try {
                 val images = mutableListOf<File>()
-                var downloadSuccessful = true
+                val standardImageFile = createStandardImageFile()
 
                 repeat(5) { index ->
                     try {
@@ -34,34 +41,38 @@ class FetchAndSaveImagesUseCase(
 
                         images.add(file)
                     } catch (e: Exception) {
-                        downloadSuccessful = false
-                        e.printStackTrace()
+                        standardImageFile.let { images.add(it) }
                     }
                 }
 
-//                val fallbackImagePath = "android.resource://${context.packageName}/drawable/list_avatar_bg"
-//
-//                contacts.forEach { contact ->
-//                    if (contact.imagePath == null) {
-//                        val imagePath = if (downloadSuccessful && images.isNotEmpty()) {
-//                            images.random().absolutePath
-//                        } else {
-//                            fallbackImagePath
-//                        }
-//                        contact.imagePath = imagePath
-//                        contactDao.updateContactImage(contact.id, imagePath)
-//                    }
-//                }
+                val imageIndexes = images.indices.toMutableList()
+                imageIndexes.shuffle()
+
+                val contactImageMap = contacts.mapIndexed { index, contact ->
+                    val imageFile = images[imageIndexes[index % images.size]]
+                    contact.imagePath = imageFile.absolutePath
+                    contact.id to contact.imagePath
+                }.toMap()
+
+                contactImageMap.forEach { (contactId, imagePath) ->
+                    contactDao.updateContactImage(contactId, imagePath!!)
+                }
+
             } catch (e: Exception) {
                 e.printStackTrace()
-                val fallbackImagePath = "android.resource://${context.packageName}/drawable/list_avatar_bg"
-                contacts.forEach { contact ->
-                    if (contact.imagePath == null) {
-                        contact.imagePath = fallbackImagePath
-                        contactDao.updateContactImage(contact.id, fallbackImagePath)
-                    }
+            }
+        }
+    }
+
+    private fun createStandardImageFile(): File {
+        val standardImageFile = File(context.filesDir, "list_avatar_bg.jpg")
+        if (!standardImageFile.exists()) {
+            context.resources.openRawResource(standardImageResourceId).use { inputStream ->
+                FileOutputStream(standardImageFile).use { outputStream ->
+                    inputStream.copyTo(outputStream)
                 }
             }
         }
+        return standardImageFile
     }
 }
